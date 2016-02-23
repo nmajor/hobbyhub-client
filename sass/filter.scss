@@ -1,0 +1,47 @@
+@import 'variables';
+
+.filter {
+  .filter-form-button {
+    margin-bottom: 10px;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    color: $color-primary;
+    border: 2px solid $color-primary;
+    font-weight: bold;
+    padding: 10px;
+
+    &.active {
+      cursor: pointer;
+      color: #fff;
+      background: $color-primary;
+    }
+
+    &.half {
+      width: 50%;
+    }
+    &.third {
+      width: 33.33%;
+    }
+
+    &.left {
+      border-right-width: 1px;
+    }
+    &.right {
+      border-left-width: 1px;
+    }
+    &.mid {
+      border-left-width: 1px;
+      border-right-width: 1px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: #fff;
+      background: $color-primary-darkest;
+      border-color: $color-primary-darkest;
+    }
+  }
+
+
+}

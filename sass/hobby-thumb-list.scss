@@ -1,0 +1,20 @@
+@import 'variables';
+
+.hobby-thumb-list {
+  .hobby-thumb {
+    padding: 10px;
+    color: $color-primary;
+    font-weight: bold;
+
+    &.active {
+      color: #fff;
+      background: $color-primary;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: #fff;
+      background: $color-primary-darkest;
+    }
+  }
+}
