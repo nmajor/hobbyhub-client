@@ -5,6 +5,6 @@ module.exports = function() {
     // return 'http://dockerhost/'
     return 'http://localhost:3000/'
   } else {
-    return '';
+    return 'http://api.dathobby.com';
   }
 }();
