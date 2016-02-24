@@ -86,7 +86,11 @@ var CompilationStore = Reflux.createStore({
   onRemoveResource: function(attr, index) {
     if (!this.data.hobby[attr] || !this.data.hobby[attr][parseInt(index)]) { return; }
 
-    var blah = this.data.hobby[attr].splice(parseInt(index), 1);
+    this.data.hobby[attr].splice(parseInt(index), 1);
+
+    console.log(attr);
+    console.log(this.data.hobby[attr]);
+
     this.trigger(this.data);
   },
   onSetResource: function(attr, index, resource) {

@@ -4,6 +4,7 @@ var Link = require('react-router').Link;
 var _ = require('lodash');
 
 var UserStore = require('../stores/user-store');
+var EmbeddedVideo = require('./embedded-video');
 
 module.exports = React.createClass({
   mixins: [
@@ -25,7 +26,6 @@ module.exports = React.createClass({
           <img className="hobby-image" src={this.props.hobby.imageUrl} />
         </div>
         <div className="col-md-6">
-          <h4>Info</h4>
           {this.renderInfo()}
         </div>
       </div>
@@ -37,12 +37,15 @@ module.exports = React.createClass({
       </div>
       <div className="row">
         <div className="col-md-6">
-          <h4>Resources</h4>
           {this.renderResources()}
         </div>
         <div className="col-md-6">
-          <h4>Affiliate Links</h4>
           {this.renderAffiliateLinks()}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-12">
+          {this.renderVideos()}
         </div>
       </div>
     </div>
@@ -57,6 +60,7 @@ module.exports = React.createClass({
 
   renderInfo: function() {
     return <div>
+      <h4>Info</h4>
       {this.renderIndoorInfo()}
       {this.renderComputerInfo()}
       {this.renderComputerInfo()}
@@ -77,17 +81,40 @@ module.exports = React.createClass({
     }
   },
   renderResources: function() {
-    if (!this.props.hobby.resources) {return null;}
+    if (!this.props.hobby.resources || this.props.hobby.resources.length === 0) {return null;}
 
-    return this.props.hobby.resources.map(function(resource, index) {
+    var resources = this.props.hobby.resources.map(function(resource, index) {
       return <Link className="reference" key={index} to={resource.ref}>{resource.text}</Link>
     });
+
+    return  <div>
+      <h4>Resources</h4>
+      {resources}
+    </div>
   },
   renderAffiliateLinks: function() {
-    if (this.props.hobby.affiliateLinks) {return null;}
+    if (!this.props.hobby.affiliateLinks || this.props.hobby.affiliateLinks.length === 0) { return null; }
 
-    return this.props.hobby.affiliateLinks.map(function(resource, index) {
+    var affiliateLinks = this.props.hobby.affiliateLinks.map(function(resource, index) {
       return <Link className="reference" key={index} to={resource.ref}>{resource.text}</Link>
     });
-  }
+
+    return  <div>
+      <h4>Affiliate Links</h4>
+      {affiliateLinks}
+    </div>
+  },
+  renderVideos: function() {
+    if (!this.props.hobby.videos || this.props.hobby.videos.length === 0) { return null; }
+
+    var videos = this.props.hobby.videos.map(function(video, index) {
+      return <EmbeddedVideo src={video.src} key={index} />
+    });
+
+    return <div>
+      <h4>Videos</h4>
+      {videos}
+    </div>
+  },
+
 });

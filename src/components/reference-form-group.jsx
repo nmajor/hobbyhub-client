@@ -4,7 +4,7 @@ var HobbyActions = require('../actions/hobby-actions');
 
 module.exports = React.createClass({
   render: function() {
-    return <div className="resource-form-group form-inline">
+    return <div className="resource-form-group bottom-bumper form-inline">
       <div className="form-group right-bumper">Url: <input
           type="text"
           className="form-control"

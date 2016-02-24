@@ -6,6 +6,7 @@ var HobbyActions = require('../actions/hobby-actions');
 var HobbyStore = require('../stores/hobby-store');
 
 var ReferenceFormGroup = require('./reference-form-group');
+var VideoFormGroup = require('./video-form-group');
 
 module.exports = React.createClass({
   mixins: [
@@ -20,7 +21,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    return <div className="new-hobby row">
+    return <div className="hobby-form row">
       <div className="col-md-8 col-md-offset-2">
         <h1>{this.renderHeaderText()}</h1>
         {this.renderForm()}
@@ -39,6 +40,7 @@ module.exports = React.createClass({
   renderForm: function() {
     if (this.state.hobby) {
       return <form onSubmit={this.handleFormSubmit}>
+        {this.renderImageUrlFormGroup()}
         {this.renderNameFormGroup()}
         {this.renderDescFormGroup()}
         {this.renderIndoorCheckbox()}
@@ -49,8 +51,32 @@ module.exports = React.createClass({
         {this.renderStartingCostFormGroup()}
         {this.renderRepeatCostFormGroup()}
         {this.renderResourcesFormGroup()}
+        {this.renderAffiliateLinkFormGroup()}
+        {this.renderVideosFormGroup()}
+        {this.renderUpdatedAt()}
         <button onClick={this.handleFormSubmit} className="btn btn-success btn-block">Save</button>
       </form>
+    }
+  },
+  renderImageUrlFormGroup: function() {
+    return <div className="form-group">
+      <label htmlFor="hobby-image-url">Image Url</label>
+      {this.renderImagePreview()}
+      <input
+        type="text"
+        className="form-control"
+        id="hobby-image-url"
+        placeholder="http://example.com/image.jpeg"
+        value={this.state.hobby.imageUrl}
+        onChange={this.handleImageUrlChange}
+        />
+    </div>
+  },
+  renderImagePreview: function() {
+    if (this.state.hobby.imageUrl) {
+      return <div className="image-preview bottom-bumper">
+        <img src={this.state.hobby.imageUrl} />
+      </div>
     }
   },
   renderNameFormGroup: function() {
@@ -185,8 +211,41 @@ module.exports = React.createClass({
       </div>
     </div>
   },
+  renderAffiliateLinkFormGroup: function() {
+    var affiliateLinkFormGroups = _.map(this.state.hobby.affiliateLinks, function(resource, index) {
+      return <ReferenceFormGroup key={index} resource={resource} index={index} attr='affiliateLinks' />
+    });
+
+    return <div>
+      <label htmlFor="hobby-resources">Affiliate Links</label>
+      {affiliateLinkFormGroups}
+      <div className="form-group">
+        <button className="btn btn-success" onClick={this.handleAddAffiliateLinkClick}>Add Affiliate Link</button>
+      </div>
+    </div>
+  },
+  renderVideosFormGroup: function() {
+    var videos = _.map(this.state.hobby.videos, function(video, index) {
+      return <VideoFormGroup key={index} video={video} index={index} />
+    });
+
+    return <div>
+      <label htmlFor="hobby-resources">Youtube Videos</label>
+      {videos}
+      <div className="form-group">
+        <button className="btn btn-success" onClick={this.handleAddVideoClick}>Add Video</button>
+      </div>
+    </div>
+  },
+  renderUpdatedAt: function() {
+    console.log(this.state.hobby);
+    if (this.state.hobby.updatedAt) {
+      return <div className="updated-at">Updated At: {this.state.hobby.updatedAt}</div>
+    }
+  },
 
   // Event Handlers
+  handleImageUrlChange: function(event) { HobbyActions.SetHobbyAttribute('imageUrl', event.target.value); },
   handleNameChange: function(event) { HobbyActions.SetHobbyAttribute('name', event.target.value); },
   handleDescChange: function(event) { HobbyActions.SetHobbyAttribute('desc', event.target.value); },
   handleIndoorChange: function(event) { HobbyActions.SetHobbyAttribute('indoor', !this.state.hobby.indoor); },
@@ -213,6 +272,10 @@ module.exports = React.createClass({
   handleAddAffiliateLinkClick: function(event) {
     event.preventDefault();
     HobbyActions.AddResource('affiliateLinks', {ref: '', text: ''});
+  },
+  handleAddVideoClick: function(event) {
+    event.preventDefault();
+    HobbyActions.AddResource('videos', {ref: ''});
   },
   handleFormSubmit: function(event) {
     event.preventDefault();

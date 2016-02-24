@@ -28,6 +28,11 @@
     background: #234863;
     border-color: #234863; }
 
+.hobby-form .image-preview {
+  width: 50%; }
+  .hobby-form .image-preview img {
+    width: 100%; }
+
 .hobby-thumb-list .hobby-thumb {
   text-decoration: none;
   display: block;
@@ -66,8 +71,21 @@
     font-weight: normal;
     font-size: 16px; }
 
-.resource-form-group {
-  margin-bottom: 10px; }
+.hobby .embedded-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden; }
+
+.hobby .embedded-video iframe,
+.hobby .embedded-video object,
+.hobby .embedded-video embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
 
 .header-bumper {
   height: 60px; }
@@ -77,3 +95,9 @@
 
 .right-bumper {
   margin-right: 10px; }
+
+.top-bumper {
+  margin-top: 10px; }
+
+.bottom-bumper {
+  margin-bottom: 10px; }
