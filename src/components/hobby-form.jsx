@@ -238,7 +238,6 @@ module.exports = React.createClass({
     </div>
   },
   renderUpdatedAt: function() {
-    console.log(this.state.hobby);
     if (this.state.hobby.updatedAt) {
       return <div className="updated-at">Updated At: {this.state.hobby.updatedAt}</div>
     }

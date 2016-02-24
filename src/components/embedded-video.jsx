@@ -7,7 +7,6 @@ module.exports = React.createClass({
     </div>
   },
   renderEmbeddedVideo: function() {
-    console.log(this.props);
     if (this.props.src) {
       return <iframe
         src={this.src()}

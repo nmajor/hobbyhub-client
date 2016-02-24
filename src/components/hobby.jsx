@@ -53,7 +53,7 @@ module.exports = React.createClass({
   renderHobbyActions: function() {
     if (this.state.userLoggedIn) {
       return <div className="hobby-actions">
-        <Link to={'/hobbies/' + this.props.hobby.slug + '/edit'} className="edit-hobby">edit</Link>
+        <Link to={'/admin/hobbies/' + this.props.hobby.slug + '/edit'} className="edit-hobby">edit</Link>
       </div>
     }
   },

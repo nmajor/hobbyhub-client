@@ -32,6 +32,7 @@ var CompilationStore = Reflux.createStore({
     } else {
       Api.get('hobbies/'+hobbySlug)
       .then(function(data) {
+        if (data === null) { history.push('/404'); return; }
         if (data.error) { console.log('Something went wrong'); console.log(data.error); return; }
 
         HobbyActions.SetHobby(data);
