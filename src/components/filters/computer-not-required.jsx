@@ -10,7 +10,7 @@ module.exports = React.createClass({
       active={this.isActive()}
       handleClick={this.handleClick}
     >
-      No Computer
+      No Comp
     </FilterFormButton>
   },
   isActive: function() {

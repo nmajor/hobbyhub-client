@@ -1,4 +1,5 @@
 var React = require('react');
+var _ = require('lodash');
 
 var HobbyActions = require('../../actions/hobby-actions');
 var FilterFormButton = require('./filter-form-button');
@@ -13,14 +14,32 @@ module.exports = React.createClass({
       Beg
     </FilterFormButton>
   },
+  val: 0,
   isActive: function() {
-    return (this.props.filter.difficulty === 0);
+    var difficulty = this.props.filter.difficulty || [];
+    return (difficulty.indexOf(this.val) > -1);
   },
   handleClick: function() {
-    if (this.props.filter.difficulty === 0) {
-      HobbyActions.SetFilter('difficulty', undefined)
+    var difficulty = this.props.filter.difficulty || [];
+    var val = this.val;
+
+    if (difficulty.indexOf(val) > -1) {
+      _.remove(difficulty, function(d) { return d === val })
     } else {
-      HobbyActions.SetFilter('difficulty', 0)
+      difficulty.push(val)
     }
+
+    if (difficulty.length === 0) {
+      difficulty = undefined;
+    }
+
+    HobbyActions.SetFilter('difficulty', difficulty);
+
+    // (myarr.indexOf("turtles") > -1)
+    // if (this.props.filter.difficulty === 0) {
+    //   HobbyActions.SetFilter('difficulty', undefined)
+    // } else {
+    //   HobbyActions.SetFilter('difficulty', 0)
+    // }
   }
 });

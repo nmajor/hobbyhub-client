@@ -1,19 +1,16 @@
 var React = require('react');
+var Link = require('react-router').Link;
 
 var HobbyActions = require('../actions/hobby-actions');
+var history = require('../history');
 
 module.exports = React.createClass({
   render: function() {
-    return <div
+    return <Link
       className={'hobby-thumb ' + (this.props.active ? 'active' : '')}
-      onClick={this.handleClick}
+      to={'hobbies/'+this.props.hobby.slug}
     >
       {this.props.hobby.name}
-    </div>
-  },
-  renderActiveClass: function() {
-  },
-  handleClick: function() {
-    HobbyActions.SetHobby(this.props.hobby);
+    </Link>
   }
 });

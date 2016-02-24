@@ -2,6 +2,8 @@
 
 .hobby-thumb-list {
   .hobby-thumb {
+    text-decoration: none;
+    display: block;
     padding: 10px;
     color: $color-primary;
     font-weight: bold;

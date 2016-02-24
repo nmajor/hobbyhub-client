@@ -13,7 +13,6 @@ var StartingCostFilter = require('./filters/starting-cost');
 
 module.exports = React.createClass({
   render: function() {
-    console.log(this.props.filter);
     return <div className="filter">
       <div className="row">
         <div className="col-md-12">

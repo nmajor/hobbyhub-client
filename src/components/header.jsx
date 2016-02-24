@@ -20,7 +20,8 @@ module.exports = React.createClass({
   renderNav: function() {
     if (this.state.userLoggedIn && this.state.user) {
       return <ul className="nav navbar-nav">
-        <li><Link to="/hobby/new">Add Hobby</Link></li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/hobbies/new">Add Hobby</Link></li>
       </ul>
     } else {
       return null;

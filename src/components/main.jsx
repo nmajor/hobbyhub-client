@@ -1,5 +1,6 @@
 var React = require('react');
 var Reflux = require('reflux');
+var _ = require('lodash');
 
 var HobbyActions = require('../actions/hobby-actions');
 var HobbyStore = require('../stores/hobby-store');
@@ -14,6 +15,11 @@ module.exports = React.createClass({
   ],
   componentWillMount: function() {
     HobbyActions.GetHobbies();
+  },
+  componentWillUpdate: function() {
+    if (this.props.params.hobbySlug && _.get(this.state, 'hobby.slug') !== this.props.params.hobbySlug) {
+      HobbyActions.GetHobby(this.props.params.hobbySlug);
+    } else {}
   },
   render: function() {
     return <div className="main">
@@ -36,7 +42,7 @@ module.exports = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-3">
-            <HobbyThumbList hobbies={this.state.hobbies} hobby={this.state.hobby} />
+            <HobbyThumbList filter={this.state.filter} hobbies={this.state.hobbies} hobby={this.state.hobby} />
           </div>
           <div className="col-md-9">
             <Hobby hobby={this.state.hobby} />

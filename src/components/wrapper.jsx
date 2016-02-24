@@ -5,6 +5,7 @@ var UserStore = require('../stores/user-store');
 var UserActions = require('../actions/user-actions');
 
 var Header = require('./header');
+var Main = require('./main');
 
 module.exports = React.createClass({
   componentWillMount: function() {

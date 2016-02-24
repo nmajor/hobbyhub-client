@@ -8,17 +8,17 @@ var Wrapper = require('./components/wrapper');
 var Main = require('./components/main');
 var Register = require('./components/register');
 var Login = require('./components/login');
-var NewHobby = require('./components/new-hobby');
-var EditHobby = require('./components/edit-hobby');
+var HobbyForm = require('./components/hobby-form');
 
 module.exports = (
   <Router history={history}>
-    <Route path="/" component={Wrapper}>
-      <Route path="register" component={Register} />
-      <Route path="login" component={Login} />
-      <Route path="hobby/new" component={NewHobby} />
-      <Route path="hobby/:hobbySlug/edit" component={EditHobby} />
-      <Route path="hobby/:hobbySlug" component={Main} />
+    <Route component={Wrapper}>
+      <Route path="/" component={Main} />
+      <Route path="/hobbies/new" component={HobbyForm} />
+      <Route path="/hobbies/:hobbySlug" component={Main} />
+      <Route path="/hobbies/:hobbySlug/edit" component={HobbyForm} />
+      <Route path="/register" component={Register} />
+      <Route path="/login" component={Login} />
     </Route>
   </Router>
 );
