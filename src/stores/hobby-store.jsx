@@ -24,6 +24,15 @@ var CompilationStore = Reflux.createStore({
       this.trigger(this.data);
     }.bind(this));
   },
+  onGetAllHobbies: function() {
+    Api.get('hobbies/all')
+    .then(function(data) {
+      if (data.error) { console.log('Something went wrong'); console.log(data.error); return; }
+
+      this.data.hobbies = data;
+      this.trigger(this.data);
+    }.bind(this));
+  },
   onGetHobby: function(hobbySlug) {
     var hobby = _.find(this.data.hobbies, {slug: hobbySlug});
 

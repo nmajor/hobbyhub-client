@@ -10,7 +10,7 @@ module.exports = React.createClass({
     Reflux.connect(HobbyStore),
   ],
   componentWillMount: function() {
-    HobbyActions.GetHobbies();
+    HobbyActions.GetAllHobbies();
   },
   render: function() {
     return <div className="hobby-list">
@@ -18,10 +18,21 @@ module.exports = React.createClass({
     </div>
   },
   renderHobbyList: function() {
-    if (!this.state.hobbies) {return null;}
+    if (!this.state.hobbies) {return 'Loading Hobbies ...';}
 
     return this.state.hobbies.map(function(hobby) {
-      return <div key={hobby._id} className="hobby-list-item">{hobby.name} <Link to={'/admin/hobbies/'+hobby.slug+'/edit'}>Edit</Link></div>
-    })
+      return <div key={hobby._id} className="hobby-list-item">
+          {this.renderPublicIcon(hobby.public)}
+          <span className="hobby-name mid-bumper">{hobby.name}</span>
+          <Link to={'/admin/hobbies/'+hobby.slug+'/edit'} >Edit</Link>
+      </div>
+    }.bind(this))
+  },
+  renderPublicIcon: function(pub) {
+    if (pub) {
+      return <span className="public text-success"><span className="glyphicon glyphicon-ok" aria-hidden="true"></span></span>
+    } else {
+      return <span className="public text-muted"><span className="glyphicon glyphicon-minus" aria-hidden="true"></span></span>
+    }
   }
 });

@@ -33,6 +33,11 @@
   .hobby-form .image-preview img {
     width: 100%; }
 
+.hobby-form .view-link {
+  font-size: 16px;
+  font-weight: normal;
+  text-decoration: none; }
+
 .hobby-thumb-list .hobby-thumb {
   text-decoration: none;
   display: block;
@@ -104,6 +109,9 @@
 
 .bottom-bumper {
   margin-bottom: 10px; }
+
+.mid-bumper {
+  margin: 0 10px; }
 
 .page-not-found h1 {
   font-size: 10em; }

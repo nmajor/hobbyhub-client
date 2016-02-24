@@ -1,5 +1,6 @@
 var React = require('react');
 var Reflux = require('reflux');
+var Link = require('react-router').Link;
 var _ = require('lodash');
 
 var HobbyActions = require('../actions/hobby-actions');
@@ -23,7 +24,7 @@ module.exports = React.createClass({
   render: function() {
     return <div className="hobby-form row">
       <div className="col-md-8 col-md-offset-2">
-        <h1>{this.renderHeaderText()}</h1>
+        <h1>{this.renderHeaderText()} {this.renderViewLink()}</h1>
         {this.renderForm()}
       </div>
     </div>
@@ -35,6 +36,13 @@ module.exports = React.createClass({
       return 'Edit Hobby';
     } else {
       return 'New Hobby'
+    }
+  },
+  renderViewLink: function() {
+    if (!this.state.hobby) {return null;}
+
+    if (this.state.hobby._id) {
+      return <Link className="view-link" to={'/hobbies/'+this.state.hobby.slug}>view</Link>;
     }
   },
   renderForm: function() {
@@ -53,6 +61,7 @@ module.exports = React.createClass({
         {this.renderResourcesFormGroup()}
         {this.renderAffiliateLinkFormGroup()}
         {this.renderVideosFormGroup()}
+        {this.renderPublicCheckbox()}
         {this.renderUpdatedAt()}
         <button onClick={this.handleFormSubmit} className="btn btn-success btn-block">Save</button>
       </form>
@@ -237,6 +246,13 @@ module.exports = React.createClass({
       </div>
     </div>
   },
+  renderPublicCheckbox: function() {
+    return <div className="checkbox">
+      <label>
+        <input type="checkbox" id="hobby-indoor" onChange={this.handlePublicChange} checked={this.state.hobby.public} /> Public
+      </label>
+    </div>
+  },
   renderUpdatedAt: function() {
     if (this.state.hobby.updatedAt) {
       return <div className="updated-at">Updated At: {this.state.hobby.updatedAt}</div>
@@ -251,6 +267,7 @@ module.exports = React.createClass({
   handleComputerChange: function(event) { HobbyActions.SetHobbyAttribute('computer', !this.state.hobby.computer); },
   handlePracticalChange: function(event) { HobbyActions.SetHobbyAttribute('practical', !this.state.hobby.practical); },
   handleArtisticChange: function(event) { HobbyActions.SetHobbyAttribute('artistic', !this.state.hobby.artistic); },
+  handlePublicChange: function(event) { HobbyActions.SetHobbyAttribute('public', !this.state.hobby.public); },
   handleDifficultyChange: function(event) { HobbyActions.SetHobbyAttribute('difficulty', parseInt(event.target.value)); },
   handleStartingCostLowChange: function(event) {
     HobbyActions.SetHobbyAttribute('startingCost', [parseInt(event.target.value), _.get(this.state.hobby, 'startingCost[1]')]);

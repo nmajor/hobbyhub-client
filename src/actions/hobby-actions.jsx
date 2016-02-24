@@ -2,6 +2,7 @@ var Reflux = require('reflux');
 
 var Actions = Reflux.createActions([
   "GetHobbies",
+  "GetAllHobbies",
   "GetHobby",
   "SetHobby",
   "SetFilter",
