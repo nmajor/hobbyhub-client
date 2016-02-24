@@ -57,13 +57,16 @@ module.exports = React.createClass({
       </div>
     }
   },
-
   renderInfo: function() {
     return <div>
       <h4>Info</h4>
       {this.renderIndoorInfo()}
       {this.renderComputerInfo()}
-      {this.renderComputerInfo()}
+      {this.renderPracticalInfo()}
+      {this.renderArtisticInfo()}
+      {this.renderDifficultyInfo()}
+      {this.renderStartingCostInfo()}
+      {this.renderRepeatCostInfo()}
     </div>
   },
   renderIndoorInfo: function() {
@@ -78,6 +81,51 @@ module.exports = React.createClass({
       return <div className="info-item">
         { this.props.hobby.computer === true ? 'Computer' : 'No Computer' }
       </div>
+    }
+  },
+  renderPracticalInfo: function() {
+    if (this.props.hobby.practical !== undefined && this.props.hobby.indoor === true) {
+      return <div className="info-item">Practical</div>
+    }
+  },
+  renderArtisticInfo: function() {
+    if (this.props.hobby.artistic !== undefined && this.props.hobby.artistic === true) {
+      return <div className="info-item">Artistic</div>
+    }
+  },
+  renderDifficultyInfo: function() {
+    if (this.props.hobby.difficulty !== undefined) {
+      var difficultyString = '';
+      switch(this.props.hobby.difficulty) {
+        case 0:
+          difficultyString = 'Beginner';
+          break;
+        case 1:
+          difficultyString = 'Intermediate';
+          break;
+        case 1:
+          difficultyString = 'Advanced';
+          break;
+      }
+      return <div className="info-item">{difficultyString}</div>
+    }
+  },
+  renderStartingCostInfo: function() {
+    if (this.props.hobby.startingCost !== undefined) {
+      if (this.props.hobby.startingCost[0] === this.props.hobby.startingCost[1]) {
+        return <div className="info-item">Start ${this.props.hobby.startingCost[0]}</div>
+      } else {
+        return <div className="info-item">Start ${this.props.hobby.startingCost[0]}-${this.props.hobby.startingCost[1]}</div>
+      }
+    }
+  },
+  renderRepeatCostInfo: function() {
+    if (this.props.hobby.repeatCost !== undefined) {
+      if (this.props.hobby.repeatCost[0] === this.props.hobby.repeatCost[1]) {
+        return <div className="info-item">Repeat ${this.props.hobby.repeatCost[0]}</div>
+      } else {
+        return <div className="info-item">Repeat ${this.props.hobby.repeatCost[0]}-${this.props.hobby.repeatCost[1]}</div>
+      }
     }
   },
   renderResources: function() {
