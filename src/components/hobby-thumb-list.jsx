@@ -11,10 +11,6 @@ module.exports = React.createClass({
     </div>
   },
   renderList: function() {
-    if (this.props.loading) {
-      return <div><span className="text-loader"><Loading /></span> Loading hobbies</div>
-    }
-
     if (this.props.hobbies) {
       return this.filteredHobbies().map(function(hobby, index) {
         return <HobbyThumb key={hobby._id} hobby={hobby} active={_.get(this.props.hobby, 'slug') === hobby.slug} />

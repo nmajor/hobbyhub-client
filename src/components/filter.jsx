@@ -1,5 +1,6 @@
 var React = require('react');
 
+var Loading = require('./loading');
 var IndoorFilter = require('./filters/indoor');
 var OutdoorFilter = require('./filters/outdoor');
 var ComputerRequiredFilter = require('./filters/computer-required');
@@ -25,7 +26,8 @@ module.exports = React.createClass({
         {this.renderArtisticFilter()}
         {this.renderPracticalFilter()}
         {this.renderDifficultyFilter()}
-        {this.renderStartingCostFilter()}
+
+        {this.renderFilterCount()}
       </div>
     </div>
   },
@@ -61,6 +63,21 @@ module.exports = React.createClass({
   renderStartingCostFilter: function() {
     return <div className="col-md-3">
       <StartingCostFilter filter={this.props.filter} />
+    </div>
+  },
+  renderFilterCount: function() {
+    var content;
+
+    if (this.props.loadingHobbies) {
+      content = <div className="filtered-count"><span className="filtered-loader"><Loading /></span> Loading hobbies</div>
+    } else if (this.props.hobbies && this.props.hobbies.length > 0) {
+      content = <div className="filtered-count">{this.props.hobbies.length} Hobbies</div>
+    } else if (this.props.hobbies) {
+      <div className="filtered-count">{this.props.hobbies.length} Hobbies</div>
+    }
+
+    return <div className="col-md-3">
+      {content}
     </div>
   }
 });

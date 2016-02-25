@@ -43,5 +43,24 @@
     }
   }
 
+  .filtered-count {
+    margin: 10px 0;
+    color: $color-primary;
+    font-weight: bold;
+    font-size: 18px;
+
+    .filtered-loader {
+      .loader {
+        margin-right: 2px;
+        display: inline-block;
+        position: relative;
+        top: -5px;
+        height: 18px;
+        width: 18px;
+      }
+    }
+  }
+
+
 
 }

@@ -1,7 +1,13 @@
+@import "variables";
+
 .hobby {
+  border: 2px solid $color-primary;
+  padding: 20px;
+  margin: 10px 0;
   h1 {
     margin-top: 10px;
   }
+
 
   .hobby-image {
     width: 100%;
@@ -38,7 +44,7 @@
     position: relative;
     padding-bottom: 56.25%;
     padding-top: 30px; height: 0; overflow: hidden;
-}
+  }
 
   .embedded-video iframe,
   .embedded-video object,

@@ -4,6 +4,7 @@ var Actions = Reflux.createActions([
   "GetHobbies",
   "GetAllHobbies",
   "GetHobby",
+  "GetRandomHobby",
   "SetHobby",
   "SetFilter",
   "LoadNewHobby",

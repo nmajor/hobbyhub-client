@@ -60,6 +60,11 @@ var CompilationStore = Reflux.createStore({
       }.bind(this));
     }
   },
+  onGetRandomHobby: function() {
+    var hobby = _.sample(this.data.hobbies);
+    console.log(hobby);
+    HobbyActions.SetHobby(hobby);
+  },
   onSetHobby: function(hobby) {
     this.data.hobby = hobby;
     this.trigger(this.data);
