@@ -38,11 +38,12 @@ module.exports = React.createClass({
   handlePlay: function() {
     if (!this.state.played) {
       if (ga) {
-        ga.event( {
+        ga.event({
           category: 'Hobby',
-          action: 'Play Video',
-          label: this.props.hobby.name
-        } );
+          action: 'Played Video',
+          label: this.props.hobby.name,
+          value: this.props.src
+        });
       }
       this.setState({played: true});
     }

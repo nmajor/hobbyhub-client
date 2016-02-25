@@ -69,6 +69,8 @@
 
 .hobby .reference {
   display: block; }
+  .hobby .reference:hover {
+    cursor: pointer; }
 
 .hobby .hobby-actions {
   display: inline-block; }

@@ -5,6 +5,8 @@ var _ = require('lodash');
 
 var UserStore = require('../stores/user-store');
 var EmbeddedVideo = require('./embedded-video');
+var Resource = require('./resource');
+var AffiliateLink = require('./affiliate-link');
 var Loading = require('./loading');
 
 module.exports = React.createClass({
@@ -135,8 +137,8 @@ module.exports = React.createClass({
     if (!this.props.hobby.resources || this.props.hobby.resources.length === 0) {return null;}
 
     var resources = this.props.hobby.resources.map(function(resource, index) {
-      return <Link className="reference" key={index} to={resource.ref}>{resource.text}</Link>
-    });
+      return <Resource hobby={this.props.hobby} resource={resource} key={index} />
+    }.bind(this));
 
     return  <div>
       <h4>Resources</h4>
@@ -147,8 +149,8 @@ module.exports = React.createClass({
     if (!this.props.hobby.affiliateLinks || this.props.hobby.affiliateLinks.length === 0) { return null; }
 
     var affiliateLinks = this.props.hobby.affiliateLinks.map(function(resource, index) {
-      return <Link className="reference" key={index} to={resource.ref}>{resource.text}</Link>
-    });
+      return <AffiliateLink hobby={this.props.hobby} resource={resource} key={index} />
+    }.bind(this));
 
     return  <div>
       <h4>Affiliate Links</h4>
@@ -167,5 +169,8 @@ module.exports = React.createClass({
       {videos}
     </div>
   },
+  handleAffiliateLinkClick: function() {
+
+  }
 
 });

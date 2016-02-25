@@ -21,6 +21,9 @@
 
   .reference {
     display: block;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .hobby-actions {
