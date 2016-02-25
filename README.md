@@ -1,8 +1,6 @@
 ## TODO
 
-
 Minify and compress files
-
 Add Cost Filters
 Google Analytics
 New Relic
