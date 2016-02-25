@@ -159,8 +159,8 @@ module.exports = React.createClass({
     if (!this.props.hobby.videos || this.props.hobby.videos.length === 0) { return null; }
 
     var videos = this.props.hobby.videos.map(function(video, index) {
-      return <EmbeddedVideo src={video.src} key={index} />
-    });
+      return <EmbeddedVideo hobby={this.props.hobby} src={video.src} key={index} />
+    }.bind(this));
 
     return <div>
       <h4>Videos</h4>

@@ -1,6 +1,15 @@
 var React = require('react');
+var YouTube = require('react-youtube').default;
+
+var ga = require('../ga');
 
 module.exports = React.createClass({
+  getInitialState: function() {
+    return { played: false }
+  },
+  shouldComponentUpdate: function() {
+    return false;
+  },
   render: function() {
     return <div className="embedded-video">
       {this.renderEmbeddedVideo()}
@@ -8,19 +17,34 @@ module.exports = React.createClass({
   },
   renderEmbeddedVideo: function() {
     if (this.props.src) {
-      return <iframe
-        src={this.src()}
-        frameBorder="0"
-        width="560"
-        height="315"
-        allowFullScreen
-      ></iframe>
+      return <YouTube
+        videoId={this.youTubeId()}
+        opts={this.opts()}
+        onPlay={this.handlePlay}
+      />
     }
   },
-  src: function() {
+  opts: function() {
+    return {
+      frameBorder: "0",
+      width: "560",
+      height: "315"
+    }
+  },
+  youTubeId: function() {
     var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    var id = this.props.src.match(regExp)[2];
-
-    return 'https://www.youtube.com/embed/' + id;
+    return this.props.src.match(regExp)[2];
+  },
+  handlePlay: function() {
+    if (!this.state.played) {
+      if (ga) {
+        ga.event( {
+          category: 'Hobby',
+          action: 'Play Video',
+          label: this.props.hobby.name
+        } );
+      }
+      this.setState({played: true});
+    }
   }
 });

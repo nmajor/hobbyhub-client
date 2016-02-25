@@ -3,6 +3,7 @@ var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 
 var history = require('./history');
+var ga = require('./ga');
 
 var Wrapper = require('./components/wrapper');
 var Main = require('./components/main');
@@ -14,9 +15,14 @@ var HobbyList = require('./components/hobby-list');
 var PageNotFound = require('./components/page-not-found');
 var Users = require('./components/users');
 
+
+function handleEnterRoute(props) {
+  if (ga) { ga.pageview(props.location.pathname); }
+}
+
 module.exports = (
   <Router history={history}>
-    <Route component={Wrapper}>
+    <Route onEnter={handleEnterRoute} component={Wrapper}>
       <Route path="/" component={Main} />
       <Route path="/hobbies/:hobbySlug" component={Main} />
       <Route path="/login" component={Login} />
