@@ -57,7 +57,7 @@ function bundle() {
 }
 bundler.on('update', bundle);
 
-gulp.task('build', function() {
+gulp.task('build-dev', function() {
   bundle()
 });
 
@@ -86,11 +86,13 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('default', ['build', 'serve', 'sass', 'watch']);
+gulp.task('default', ['build-dev', 'serve', 'sass', 'watch']);
 
 gulp.task('watch', function () {
   gulp.watch('./sass/**/*.scss', ['sass']);
 });
+
+gulp.task('build', ['compresscss', 'compressjs']);
 
 gulp.task('compress', ['compresscss', 'compressjs']);
 
