@@ -12,15 +12,17 @@ var Login = require('./components/login');
 var HobbyForm = require('./components/hobby-form');
 var HobbyList = require('./components/hobby-list');
 var PageNotFound = require('./components/page-not-found');
+var Users = require('./components/users');
 
 module.exports = (
   <Router history={history}>
     <Route component={Wrapper}>
       <Route path="/" component={Main} />
       <Route path="/hobbies/:hobbySlug" component={Main} />
-      <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <Route path="/admin/" component={Admin}>
+        <Route path="users" component={Users} />
+        <Route path="register" component={Register} />
         <Route path="hobbies/all" component={HobbyList} />
         <Route path="hobbies/new" component={HobbyForm} />
         <Route path="hobbies/:hobbySlug/edit" component={HobbyForm} />

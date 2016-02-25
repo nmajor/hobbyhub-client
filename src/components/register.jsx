@@ -3,6 +3,8 @@ var UserStore = require('../stores/user-store');
 var UserActions = require('../actions/user-actions');
 var Reflux = require('reflux');
 
+var Loading = require('./loading');
+
 module.exports = React.createClass({
   mixins: [
     Reflux.connect(UserStore),
@@ -45,8 +47,14 @@ module.exports = React.createClass({
           onChange={this.handlePasswordChange}
           />
       </div>
+      {this.renderLoading()}
       <button onClick={this.formSubmit} className="btn btn-success btn-block">Register</button>
     </form>
+  },
+  renderLoading: function() {
+    if (this.state.registeringUser) {
+      return <div><span className="text-loader"><Loading /></span> Submitting</div>
+    }
   },
   handleEmailChange: function(event) {
     this.setState({email: event.target.value});

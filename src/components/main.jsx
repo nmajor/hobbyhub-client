@@ -42,10 +42,10 @@ module.exports = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-3">
-            <HobbyThumbList filter={this.state.filter} hobbies={this.state.hobbies} hobby={this.state.hobby} />
+            <HobbyThumbList filter={this.state.filter} loading={this.state.loadingHobbies} hobbies={this.state.hobbies} hobby={this.state.hobby} />
           </div>
           <div className="col-md-9">
-            <Hobby hobby={this.state.hobby} />
+            <Hobby hobby={this.state.hobby} loading={this.state.loadingHobby} />
           </div>
         </div>
       </div>

@@ -16,20 +16,28 @@ var CompilationStore = Reflux.createStore({
     return this.data;
   },
   onGetHobbies: function() {
+    this.data.loadingHobbies = true;
+    this.trigger(this.data);
+
     Api.get('hobbies')
     .then(function(data) {
       if (data.error) { console.log('Something went wrong'); console.log(data.error); return; }
 
       this.data.hobbies = data;
+      this.data.loadingHobbies = false;
       this.trigger(this.data);
     }.bind(this));
   },
   onGetAllHobbies: function() {
+    this.data.loadingHobbies = true;
+    this.trigger(this.data);
+
     Api.get('hobbies/all')
     .then(function(data) {
       if (data.error) { console.log('Something went wrong'); console.log(data.error); return; }
 
       this.data.hobbies = data;
+      this.data.loadingHobbies = false;
       this.trigger(this.data);
     }.bind(this));
   },
@@ -39,11 +47,15 @@ var CompilationStore = Reflux.createStore({
     if (hobby) {
       HobbyActions.SetHobby(hobby);
     } else {
+      this.data.loadingHobby = true;
+      this.trigger(this.data);
+
       Api.get('hobbies/'+hobbySlug)
       .then(function(data) {
         if (data === null) { history.push('/404'); return; }
         if (data.error) { console.log('Something went wrong'); console.log(data.error); return; }
 
+        this.data.loadingHobby = false;
         HobbyActions.SetHobby(data);
       }.bind(this));
     }
@@ -70,12 +82,16 @@ var CompilationStore = Reflux.createStore({
     this.trigger(this.data);
   },
   onSaveHobby: function() {
+    this.data.savingHobby = true;
+    this.trigger(this.data);
+
     if (this.data.hobby._id) {
       Api.put('hobbies/'+this.data.hobby.slug, this.data.hobby)
       .then(function(data) {
         if (data.error) { console.log('Something went wrong'); console.log(data.error); return; }
 
         this.data.hobby = data;
+        this.data.savingHobby = false;
         this.trigger(this.data);
       }.bind(this));
     } else {
@@ -84,6 +100,7 @@ var CompilationStore = Reflux.createStore({
         if (data.error) { console.log('Something went wrong'); console.log(data.error); return; }
 
         this.data.hobby = data;
+        this.data.savingHobby = false;
         this.trigger(this.data);
       }.bind(this));
     }

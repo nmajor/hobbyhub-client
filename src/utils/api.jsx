@@ -11,6 +11,13 @@ module.exports = {
       method: 'get',
     })
     .then(function(response) {
+      if (response.status !== 200) {
+        throw {
+          error: 'Non 200 response',
+          response: response
+        };
+      }
+
       return response.json();
     });
   },
@@ -24,6 +31,13 @@ module.exports = {
       body: JSON.stringify(data)
     })
     .then(function(response) {
+      if (response.status !== 200) {
+        throw {
+          error: 'Non 200 response',
+          response: response
+        };
+      }
+
       return response.json();
     });
   },
@@ -37,6 +51,13 @@ module.exports = {
       body: JSON.stringify(data)
     })
     .then(function(response) {
+      if (response.status !== 200) {
+        throw {
+          error: 'Non 200 response',
+          response: response
+        };
+      }
+
       return response.json();
     });
   },
@@ -49,6 +70,13 @@ module.exports = {
       method: 'delete'
     })
     .then(function(response) {
+      if (response.status !== 200) {
+        throw {
+          error: 'Non 200 response',
+          response: response
+        };
+      }
+
       return response.json();
     });
   }

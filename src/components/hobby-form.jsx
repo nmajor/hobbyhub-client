@@ -8,6 +8,7 @@ var HobbyStore = require('../stores/hobby-store');
 
 var ReferenceFormGroup = require('./reference-form-group');
 var VideoFormGroup = require('./video-form-group');
+var Loading = require('./loading');
 
 module.exports = React.createClass({
   mixins: [
@@ -254,7 +255,9 @@ module.exports = React.createClass({
     </div>
   },
   renderUpdatedAt: function() {
-    if (this.state.hobby.updatedAt) {
+    if (this.state.savingHobby) {
+      return <div><span className="text-loader"><Loading /></span> Saving</div>
+    } else if (this.state.hobby.updatedAt) {
       return <div className="updated-at">Updated At: {this.state.hobby.updatedAt}</div>
     }
   },

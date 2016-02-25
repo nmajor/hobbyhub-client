@@ -22,28 +22,58 @@ module.exports = Reflux.createStore({
         this.data.userLoggedIn = true;
         this.saveAndTrigger();
       }
+    }.bind(this))
+    .catch(function(err) {});
+  },
+  onGetUsers: function() {
+    this.data.loadingUsers = true;
+    this.trigger(this.data);
+
+    Api.get('users')
+    .then(function(users) {
+      this.data.users = users;
+      this.data.loadingUsers = false;
+      this.trigger(this.data);
     }.bind(this));
   },
   onRegisterUser: function(data) {
+    this.data.registeringUser = true;
+    this.trigger(this.data);
+
     Api.post('register', data)
     .then(function(user) {
-      if (user.error) { console.log('Something went wrong'); console.log(user.error); return; }
-      if (user._id) { history.push('/login'); }
+      if (user.error) { throw user.error; }
+      if (user._id) { history.push('/admin/users'); }
       this.data.user = user;
+      this.data.registeringUser = false;
       this.saveAndTrigger();
+    }.bind(this))
+    .catch(function(err) {
+      console.log('registration error');
+      this.data.registeringUser = false;
+      this.trigger(this.data);
     }.bind(this));
   },
   onLoginUser: function(data) {
+    this.data.loggingInUser = true;
+    this.trigger(this.data);
+
     Api.post('login', data)
     .then(function(user) {
+      if (user.error) { console.log('Something went wrong'); console.log(user.error); return; }
       if (user.email) {
-        if (user.error) { console.log('Something went wrong'); console.log(user.error); return; }
         if (user._id) { history.push('/'); }
         this.data.user = user;
+        this.data.loggingInUser = false;
         this.data.userLoggedIn = true;
         this.saveAndTrigger();
       }
     }.bind(this))
+    .catch(function(err) {
+      console.log('login error');
+      this.data.loggingInUser = false;
+      this.trigger(this.data);
+    }.bind(this));
   },
   onLogoutUser: function() {
     Api.get('logout')

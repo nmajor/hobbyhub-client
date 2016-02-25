@@ -5,6 +5,7 @@ var _ = require('lodash');
 
 var UserStore = require('../stores/user-store');
 var EmbeddedVideo = require('./embedded-video');
+var Loading = require('./loading');
 
 module.exports = React.createClass({
   mixins: [
@@ -17,7 +18,9 @@ module.exports = React.createClass({
     </div>
   },
   renderHobby: function() {
-    if (!this.props.hobby) { return; }
+    if (!this.props.hobby && this.props.loading) {
+      return <div><span className="text-loader"><Loading /></span> Loading hobby</div>
+    } else if (!this.props.hobby) { return null; }
 
     return <div>
       <h1>{this.props.hobby.name} {this.renderHobbyActions()}</h1>

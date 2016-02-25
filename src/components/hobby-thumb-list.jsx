@@ -2,6 +2,7 @@ var React = require('react');
 var _ = require('lodash');
 
 var HobbyThumb = require('./hobby-thumb');
+var Loading = require('./loading');
 
 module.exports = React.createClass({
   render: function() {
@@ -10,12 +11,14 @@ module.exports = React.createClass({
     </div>
   },
   renderList: function() {
+    if (this.props.loading) {
+      return <div><span className="text-loader"><Loading /></span> Loading hobbies</div>
+    }
+
     if (this.props.hobbies) {
       return this.filteredHobbies().map(function(hobby, index) {
-        return <HobbyThumb key={hobby._id} hobby={hobby} active={this.props.hobby === hobby} />
+        return <HobbyThumb key={hobby._id} hobby={hobby} active={_.get(this.props.hobby, 'slug') === hobby.slug} />
       }.bind(this));
-    } else {
-      return 'Loading Hobbies ...'
     }
   },
   filteredHobbies: function() {
