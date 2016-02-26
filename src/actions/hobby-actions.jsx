@@ -2,7 +2,9 @@ var Reflux = require('reflux');
 
 var Actions = Reflux.createActions([
   "GetHobbies",
+  "GetHobbiesAndOrHobby",
   "GetAllHobbies",
+  "SetHobbyBySlug",
   "FilterHobbies",
   "GetHobby",
   "GetRandomHobby",

@@ -28,6 +28,22 @@ var CompilationStore = Reflux.createStore({
       HobbyActions.FilterHobbies();
     }.bind(this));
   },
+  onGetHobbiesAndOrHobby: function(hobbySlug) {
+    Api.get('hobbies')
+    .then(function(data) {
+      if (data.error) { console.log('Something went wrong'); console.log(data.error); return; }
+
+      this.data.hobbies = data;
+      this.data.loadingHobbies = false;
+      HobbyActions.FilterHobbies(function() {
+        if (hobbySlug) {
+          HobbyActions.SetHobbyBySlug(hobbySlug);
+        } else {
+          HobbyActions.GetRandomHobby();
+        }
+      });
+    }.bind(this));
+  },
   onGetAllHobbies: function() {
     this.data.loadingHobbies = true;
     this.trigger(this.data);
@@ -41,7 +57,7 @@ var CompilationStore = Reflux.createStore({
       this.trigger(this.data);
     }.bind(this));
   },
-  onFilterHobbies: function() {
+  onFilterHobbies: function(cb) {
     var filter = this.data.filter;
 
     this.data.filteredHobbies = _.filter(this.data.hobbies, function(hobby) {
@@ -54,8 +70,7 @@ var CompilationStore = Reflux.createStore({
       )
     });
 
-    if (!this.data.hobby) { HobbyActions.GetRandomHobby(); }
-    this.trigger(this.data);
+    if (cb) { cb(this.data.filteredHobbies); }
   },
   onGetHobby: function(hobbySlug) {
     var hobby = _.find(this.data.hobbies, {slug: hobbySlug});
@@ -75,6 +90,10 @@ var CompilationStore = Reflux.createStore({
         HobbyActions.SetHobby(data);
       }.bind(this));
     }
+  },
+  onSetHobbyBySlug: function(hobbySlug) {
+    var hobby = _.find(this.data.hobbies, {slug: hobbySlug});
+    HobbyActions.SetHobby(hobby);
   },
   onGetRandomHobby: function() {
     var currentHobby = this.data.hobby || {};
