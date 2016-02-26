@@ -20,7 +20,7 @@ module.exports = React.createClass({
           value={this.props.video.text}
         />
       </div>
-      <div className="form-group"> <button
+      <div className="form-group left-bumper"> <button
         className="btn btn-danger"
         onClick={this.handleRemoveClick}>Remove</button>
       </div>

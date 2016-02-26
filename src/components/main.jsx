@@ -16,9 +16,6 @@ module.exports = React.createClass({
   ],
   componentWillMount: function() {
     HobbyActions.GetHobbiesAndOrHobby(this.props.params.hobbySlug);
-    if (this.props.params.hobbySlug && _.get(this.state, 'hobby.slug') !== this.props.params.hobbySlug) {
-      HobbyActions.GetHobby(this.props.params.hobbySlug);
-    }
   },
   componentWillUpdate: function() {
 

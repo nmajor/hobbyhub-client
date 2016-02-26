@@ -29,6 +29,9 @@ var CompilationStore = Reflux.createStore({
     }.bind(this));
   },
   onGetHobbiesAndOrHobby: function(hobbySlug) {
+    this.data.loadingHobbies = true;
+    this.trigger(this.data);
+
     Api.get('hobbies')
     .then(function(data) {
       if (data.error) { console.log('Something went wrong'); console.log(data.error); return; }
@@ -148,6 +151,7 @@ var CompilationStore = Reflux.createStore({
 
         this.data.hobby = data;
         this.data.savingHobby = false;
+        history.push('admin/hobbies/'+data.slug+'/edit');
         this.trigger(this.data);
       }.bind(this));
     }
@@ -161,10 +165,6 @@ var CompilationStore = Reflux.createStore({
     if (!this.data.hobby[attr] || !this.data.hobby[attr][parseInt(index)]) { return; }
 
     this.data.hobby[attr].splice(parseInt(index), 1);
-
-    console.log(attr);
-    console.log(this.data.hobby[attr]);
-
     this.trigger(this.data);
   },
   onSetResource: function(attr, index, resource) {

@@ -116,10 +116,14 @@
     .hobby .hobby-actions .edit-hobby {
       font-weight: normal;
       font-size: 16px; }
+  .hobby .videos h4 {
+    margin-bottom: 0; }
+  .hobby .embedded-video-image img {
+    width: 100%; }
+    .hobby .embedded-video-image img:hover {
+      cursor: pointer; }
   .hobby .embedded-video-wrapper {
-    margin-bottom: 20px; }
-    .hobby .embedded-video-wrapper.botmost {
-      margin-bottom: 0; }
+    margin-top: 20px; }
   .hobby .embedded-video {
     position: relative;
     padding-bottom: 56.25%;

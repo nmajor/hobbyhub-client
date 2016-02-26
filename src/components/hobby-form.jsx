@@ -14,17 +14,9 @@ module.exports = React.createClass({
   mixins: [
     Reflux.connect(HobbyStore),
   ],
-  componentWillMount: function() {
-    if (this.props.params.hobbySlug) {
-      HobbyActions.GetHobby(this.props.params.hobbySlug);
-    } else {
-      HobbyActions.LoadNewHobby();
-    }
-  },
-
   render: function() {
     return <div className="hobby-form row">
-      <div className="col-md-8 col-md-offset-2">
+      <div className="col-md-8">
         <h1>{this.renderHeaderText()} {this.renderViewLink()}</h1>
         {this.renderForm()}
       </div>
@@ -260,7 +252,6 @@ module.exports = React.createClass({
     } else if (this.state.hobby.updatedAt) {
       var updatedTimestamp = Date.parse(this.state.hobby.updatedAt);
       var secondsAgo = parseInt( (Date.now() - updatedTimestamp) / 1000 );
-      console.log(typeof(updatedTimestamp));
       return <div className="updated-at">Updated {secondsAgo} seconds ago</div>
     }
   },

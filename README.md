@@ -8,12 +8,7 @@ Social Sharing
 Mobile
 Change affiliate links to be tiles so that images will work
 Add an optional price property to affiliate links
-Going from edit hobby to new hobby should clear the form
 Add form error messages for bad validation (Missing fields)
-Add bumper to video text attribute field
-Saving a new hobby should change the url to be the edit page of the new hobby
-Page lags when trying to load the video. Maybe show the image thumb until people click it.
-Videos are not changing when the hobby changes
 
 ## Other TODO
 Copy for about page
@@ -48,3 +43,9 @@ Add contact why page
 Add contact why link
 Fixed Nav
 Amazon affiliate account
+Add Glyphicons
+Add bumper to video text attribute field
+Going from edit hobby to new hobby should clear the form
+Page lags when trying to load the video. Maybe show the image thumb until people click it.
+Videos are not changing when the hobby changes
+Saving a new hobby should change the url to be the edit page of the new hobby

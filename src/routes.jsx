@@ -10,7 +10,8 @@ var Main = require('./components/main');
 var Admin = require('./components/admin');
 var Register = require('./components/register');
 var Login = require('./components/login');
-var HobbyForm = require('./components/hobby-form');
+var NewHobby = require('./components/new-hobby');
+var EditHobby = require('./components/edit-hobby');
 var HobbyList = require('./components/hobby-list');
 var PageNotFound = require('./components/page-not-found');
 var Users = require('./components/users');
@@ -36,8 +37,8 @@ module.exports = (
         <Route path="users" component={Users} />
         <Route path="register" component={Register} />
         <Route path="hobbies/all" component={HobbyList} />
-        <Route path="hobbies/new" component={HobbyForm} />
-        <Route path="hobbies/:hobbySlug/edit" component={HobbyForm} />
+        <Route path="hobbies/new" component={NewHobby} />
+        <Route path="hobbies/:hobbySlug/edit" component={EditHobby} />
       </Route>
       <Route path="/404" component={PageNotFound} />
     </Route>

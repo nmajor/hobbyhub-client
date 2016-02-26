@@ -152,7 +152,7 @@ module.exports = React.createClass({
       return <AffiliateLink hobby={this.props.hobby} resource={resource} key={index} />
     }.bind(this));
 
-    return  <div>
+    return <div className="affiliate-links">
       <h4>Affiliate Links</h4>
       {affiliateLinks}
     </div>
@@ -162,12 +162,16 @@ module.exports = React.createClass({
 
     var videos = this.props.hobby.videos.map(function(video, index, array) {
       var botmost = index === (array.length - 1);
-      return <EmbeddedVideo className={botmost ? 'botmost' : ''} hobby={this.props.hobby} video={video} key={index} />
+      return <div className="col-md-6">
+        <EmbeddedVideo hobby={this.props.hobby} video={video} key={index} />
+      </div>
     }.bind(this));
 
-    return <div>
+    return <div className="videos">
       <h4>Videos</h4>
-      {videos}
+      <div className="row">
+        {videos}
+      </div>
     </div>
   },
   handleAffiliateLinkClick: function() {

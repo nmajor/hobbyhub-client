@@ -43,10 +43,21 @@
     }
   }
 
-  .embedded-video-wrapper {
-    margin-bottom: 20px;
+  .videos {
+    h4 {margin-bottom: 0;}
+  }
 
-    &.botmost { margin-bottom: 0; }
+  .embedded-video-image {
+    img {
+      width: 100%;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .embedded-video-wrapper {
+    margin-top: 20px;
   }
 
   .embedded-video {
