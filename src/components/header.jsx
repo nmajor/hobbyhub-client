@@ -10,7 +10,7 @@ module.exports = React.createClass({
     Reflux.connect(UserStore),
   ],
   render: function() {
-    return <nav className="navbar navbar-inverse navbar-fixed-top header">
+    return <nav className="navbar navbar-inverse navbar-static-top header">
       <div className="container-fluid">
         {this.renderNav()}
         {this.renderUserActions()}

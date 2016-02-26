@@ -1,5 +1,21 @@
 @import "variables";
 
+html, body {
+    height: 100%;
+}
+
+#wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -80px;
+
+    .container {
+      margin-bottom: 30px;
+    }
+}
+
 .site-logo {
   margin-top: 20px;
   font-size: 35px;

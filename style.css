@@ -41,6 +41,31 @@
     height: 18px;
     width: 18px; }
 
+#push,
+#footer {
+  height: 80px; }
+
+#footer {
+  background-color: #222;
+  border-color: #080808;
+  color: #9d9d9d;
+  text-align: center; }
+  #footer .container {
+    padding-right: 15px;
+    padding-left: 15px; }
+  #footer .footer-nav {
+    margin: 30px 0; }
+    #footer .footer-nav .dot {
+      margin: 0 10px; }
+  #footer ul {
+    padding-left: 0; }
+  #footer a {
+    color: #9d9d9d; }
+    #footer a:hover {
+      color: #fff;
+      background-color: transparent;
+      text-decoration: none; }
+
 .hobby-form .image-preview {
   width: 50%; }
   .hobby-form .image-preview img {
@@ -68,7 +93,7 @@
 .hobby {
   border: 2px solid #316488;
   padding: 20px;
-  margin: 10px 0; }
+  margin-top: 10px; }
   .hobby h1 {
     margin-top: 10px; }
   .hobby .hobby-image {
@@ -175,6 +200,18 @@
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
+
+html, body {
+  height: 100%; }
+
+#wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -80px; }
+  #wrapper .container {
+    margin-bottom: 30px; }
 
 .site-logo {
   margin-top: 20px;

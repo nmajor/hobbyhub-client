@@ -20,8 +20,6 @@ module.exports = React.createClass({
   componentWillUpdate: function() {
     if (this.props.params.hobbySlug && _.get(this.state, 'hobby.slug') !== this.props.params.hobbySlug) {
       HobbyActions.GetHobby(this.props.params.hobbySlug);
-    } else if (this.state.filteredHobbies && this.state.filteredHobbies.length > 0 && !this.state.hobby) {
-      HobbyActions.GetRandomHobby();
     }
   },
   render: function() {

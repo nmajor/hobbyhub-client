@@ -2,13 +2,12 @@
 
 
 Handle www redirect (301 best for SEO)
-Add about page
-Add a site logo at the top
-Make the random button change the url too
+
 Add Cost Filters
 Social Sharing
 Mobile
 Amazon affiliate account
+
 
 ## Done
 New Relic
@@ -26,3 +25,9 @@ No repeat random hobbies
 Make filtered-count show filtered number all hobbies count
 Auto load a random
 Spacing for resources and affiliate links for wrapping text
+Add a site logo at the top
+Make the random button change the url too
+Add Footer
+Add about page
+Add Affiliate Why page
+Add affiliate why link

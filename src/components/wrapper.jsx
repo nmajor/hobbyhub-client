@@ -6,6 +6,7 @@ var UserStore = require('../stores/user-store');
 var UserActions = require('../actions/user-actions');
 
 var Header = require('./header');
+var Footer = require('./footer');
 var Main = require('./main');
 
 module.exports = React.createClass({
@@ -16,18 +17,21 @@ module.exports = React.createClass({
     Reflux.connect(UserStore),
   ],
   render: function() {
-    return <div className="wrapper">
-      <div className="container">
+    return <div>
+      <div id="wrapper">
         {this.renderHeader()}
-        {this.renderLogo()}
-        {this.props.children}
+        <div className="container">
+          {this.renderLogo()}
+          {this.props.children}
+        </div>
+        <div id="push"></div>
       </div>
+      {this.renderFooter()}
     </div>
   },
   renderHeader: function() {
     if ( this.state.userLoggedIn ) {
       return <div>
-        <div className="header-bumper"></div>
         <Header />
       </div>
     }
@@ -38,5 +42,10 @@ module.exports = React.createClass({
         <Link className="site-logo" to="/">dathobby.com</Link>
       </div>
     </div>
+  },
+  renderFooter: function() {
+    if ( this.state.userLoggedIn ) {
+      return <Footer />
+    }
   }
 });

@@ -14,6 +14,9 @@ var HobbyForm = require('./components/hobby-form');
 var HobbyList = require('./components/hobby-list');
 var PageNotFound = require('./components/page-not-found');
 var Users = require('./components/users');
+var About = require('./components/about');
+var Contact = require('./components/contact');
+var Affiliates = require('./components/affiliates');
 
 
 function handleEnterRoute(props) {
@@ -26,6 +29,9 @@ module.exports = (
       <Route path="/" component={Main} />
       <Route path="/hobbies/:hobbySlug" component={Main} />
       <Route path="/login" component={Login} />
+      <Route path="/about" component={About} />
+      <Route path="/contact" component={Contact} />
+      <Route path="/affiliates" component={Affiliates} />
       <Route path="/admin/" component={Admin}>
         <Route path="users" component={Users} />
         <Route path="register" component={Register} />
