@@ -27,6 +27,9 @@
 
   .reference {
     display: block;
+    margin-bottom: 8px;
+    line-height: 18px;
+
     &:hover {
       cursor: pointer;
     }
@@ -38,6 +41,12 @@
       font-weight: normal;
       font-size: 16px;
     }
+  }
+
+  .embedded-video-wrapper {
+    margin-bottom: 20px;
+
+    &.botmost { margin-bottom: 0; }
   }
 
   .embedded-video {

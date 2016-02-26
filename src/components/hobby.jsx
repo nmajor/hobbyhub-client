@@ -160,8 +160,9 @@ module.exports = React.createClass({
   renderVideos: function() {
     if (!this.props.hobby.videos || this.props.hobby.videos.length === 0) { return null; }
 
-    var videos = this.props.hobby.videos.map(function(video, index) {
-      return <EmbeddedVideo hobby={this.props.hobby} src={video.src} key={index} />
+    var videos = this.props.hobby.videos.map(function(video, index, array) {
+      var botmost = index === (array.length - 1);
+      return <EmbeddedVideo className={botmost ? 'botmost' : ''} hobby={this.props.hobby} video={video} key={index} />
     }.bind(this));
 
     return <div>
