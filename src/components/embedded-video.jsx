@@ -11,17 +11,20 @@ module.exports = React.createClass({
     return false;
   },
   render: function() {
-    return <div className="embedded-video">
+    return <div className={'embedded-video-wrapper ' + this.props.className}>
+      <h5>{this.props.video.text}</h5>
       {this.renderEmbeddedVideo()}
     </div>
   },
   renderEmbeddedVideo: function() {
-    if (this.props.src) {
-      return <YouTube
-        videoId={this.youTubeId()}
-        opts={this.opts()}
-        onPlay={this.handlePlay}
-      />
+    if (this.props.video.src) {
+      return <div className="embedded-video">
+        <YouTube
+          videoId={this.youTubeId()}
+          opts={this.opts()}
+          onPlay={this.handlePlay}
+        />
+      </div>
     }
   },
   opts: function() {
@@ -33,7 +36,7 @@ module.exports = React.createClass({
   },
   youTubeId: function() {
     var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    return this.props.src.match(regExp)[2];
+    return this.props.video.src.match(regExp)[2];
   },
   handlePlay: function() {
     if (!this.state.played) {
@@ -42,7 +45,7 @@ module.exports = React.createClass({
           category: 'Hobby',
           action: 'Played Video',
           label: this.props.hobby.name,
-          value: this.props.src
+          value: this.props.video.text + ' - ' + this.props.video.src
         });
       }
       this.setState({played: true});

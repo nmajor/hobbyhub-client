@@ -258,7 +258,10 @@ module.exports = React.createClass({
     if (this.state.savingHobby) {
       return <div><span className="text-loader"><Loading /></span> Saving</div>
     } else if (this.state.hobby.updatedAt) {
-      return <div className="updated-at">Updated At: {this.state.hobby.updatedAt}</div>
+      var updatedTimestamp = Date.parse(this.state.hobby.updatedAt);
+      var secondsAgo = parseInt( (Date.now() - updatedTimestamp) / 1000 );
+      console.log(typeof(updatedTimestamp));
+      return <div className="updated-at">Updated {secondsAgo} seconds ago</div>
     }
   },
 

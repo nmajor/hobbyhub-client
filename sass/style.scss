@@ -4,11 +4,15 @@
   height: 60px;
 }
 .center { text-align: center; }
+
 .left-bumper { margin-left: 10px; }
 .right-bumper { margin-right: 10px; }
 .top-bumper { margin-top: 10px; }
 .bottom-bumper { margin-bottom: 10px; }
 .mid-bumper { margin: 0 10px; }
+
+.botmost { margin-bottom: 0; }
+.topmost { margin-top: 0; }
 
 .page-not-found {
   h1 {

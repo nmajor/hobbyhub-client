@@ -3,6 +3,7 @@ var Reflux = require('reflux');
 var Actions = Reflux.createActions([
   "GetHobbies",
   "GetAllHobbies",
+  "FilterHobbies",
   "GetHobby",
   "GetRandomHobby",
   "SetHobby",
@@ -10,11 +11,11 @@ var Actions = Reflux.createActions([
   "LoadNewHobby",
   "SaveHobby",
   "AddResource",
-  "RemoveResource",
-  "SetResource"
+  "RemoveResource"
 ]);
 
 
 Actions.SetHobbyAttribute = Reflux.createAction({sync: true});
+Actions.SetResource = Reflux.createAction({sync: true});
 
 module.exports = Actions

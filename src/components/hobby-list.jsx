@@ -28,6 +28,7 @@ module.exports = React.createClass({
         return <div key={hobby._id} className="hobby-list-item">
             {this.renderPublicIcon(hobby.public)}
             <span className="hobby-name mid-bumper">{hobby.name}</span>
+            <Link className="right-bumper" to={'/hobbies/'+hobby.slug} >View</Link>
             <Link to={'/admin/hobbies/'+hobby.slug+'/edit'} >Edit</Link>
         </div>
       }.bind(this));

@@ -81,7 +81,9 @@
     width: 50%;
     text-align: left; }
   .hobby .reference {
-    display: block; }
+    display: block;
+    margin-bottom: 8px;
+    line-height: 18px; }
     .hobby .reference:hover {
       cursor: pointer; }
   .hobby .hobby-actions {
@@ -89,6 +91,10 @@
     .hobby .hobby-actions .edit-hobby {
       font-weight: normal;
       font-size: 16px; }
+  .hobby .embedded-video-wrapper {
+    margin-bottom: 20px; }
+    .hobby .embedded-video-wrapper.botmost {
+      margin-bottom: 0; }
   .hobby .embedded-video {
     position: relative;
     padding-bottom: 56.25%;
@@ -190,6 +196,12 @@
 
 .mid-bumper {
   margin: 0 10px; }
+
+.botmost {
+  margin-bottom: 0; }
+
+.topmost {
+  margin-top: 0; }
 
 .page-not-found h1 {
   font-size: 10em; }

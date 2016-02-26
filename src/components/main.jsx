@@ -20,7 +20,9 @@ module.exports = React.createClass({
   componentWillUpdate: function() {
     if (this.props.params.hobbySlug && _.get(this.state, 'hobby.slug') !== this.props.params.hobbySlug) {
       HobbyActions.GetHobby(this.props.params.hobbySlug);
-    } else {}
+    } else if (this.state.filteredHobbies && this.state.filteredHobbies.length > 0 && !this.state.hobby) {
+      HobbyActions.GetRandomHobby();
+    }
   },
   render: function() {
     return <div className="main">
@@ -45,12 +47,12 @@ module.exports = React.createClass({
   renderFilter: function() {
     return <div className="row">
       <div className="col-md-12">
-        <Filter loadingHobbies={this.state.loadingHobbies} hobbies={this.state.hobbies} filter={this.state.filter} />
+        <Filter loadingHobbies={this.state.loadingHobbies} hobbies={this.state.filteredHobbies} filter={this.state.filter} />
       </div>
     </div>
   },
   renderRandomButton: function() {
-    if (!this.state.hobbies || this.state.hobbies.length === 0) { return null; }
+    if (!this.state.filteredHobbies || this.state.filteredHobbies.length === 0) { return null; }
 
     return <div className="row">
       <div className="col-md-12">
@@ -62,7 +64,7 @@ module.exports = React.createClass({
     if (this.state.showHobbyList) {
       return <div className="row">
         <div className="col-md-3">
-          <HobbyThumbList filter={this.state.filter} loading={this.state.loadingHobbies} hobbies={this.state.hobbies} hobby={this.state.hobby} />
+          <HobbyThumbList filter={this.state.filter} loading={this.state.loadingHobbies} hobbies={this.state.filteredHobbies} hobby={this.state.hobby} />
         </div>
         <div className="col-md-9">
           <Hobby hobby={this.state.hobby} loading={this.state.loadingHobby} />

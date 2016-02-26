@@ -73,7 +73,9 @@ module.exports = React.createClass({
     } else if (this.props.hobbies && this.props.hobbies.length > 0) {
       content = <div className="filtered-count">{this.props.hobbies.length} Hobbies</div>
     } else if (this.props.hobbies) {
-      <div className="filtered-count">{this.props.hobbies.length} Hobbies</div>
+      content = <div className="filtered-count">{this.props.hobbies.length} Hobbies</div>
+    } else {
+      content = <div className="filtered-count">No Hobbies</div>
     }
 
     return <div className="col-md-3">
