@@ -9,6 +9,7 @@ Mobile
 Change affiliate links to be tiles so that images will work
 Add an optional price property to affiliate links
 Add form error messages for bad validation (Missing fields)
+Dont get hobbies again if you already have them in main component
 
 ## Other TODO
 Copy for about page
