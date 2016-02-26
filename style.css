@@ -176,6 +176,15 @@
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
 
+.site-logo {
+  margin-top: 20px;
+  font-size: 35px;
+  font-weight: bold;
+  color: #316488; }
+  .site-logo:hover {
+    text-decoration: none;
+    color: #234863; }
+
 .header-bumper {
   height: 60px; }
 

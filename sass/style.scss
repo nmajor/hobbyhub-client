@@ -1,5 +1,15 @@
 @import "variables";
 
+.site-logo {
+  margin-top: 20px;
+  font-size: 35px;
+  font-weight: bold;
+  color: $color-primary;
+  &:hover {
+    text-decoration: none;
+    color: $color-primary-darkest;
+  }
+}
 .header-bumper {
   height: 60px;
 }

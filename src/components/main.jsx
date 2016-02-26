@@ -26,18 +26,16 @@ module.exports = React.createClass({
   },
   render: function() {
     return <div className="main">
-      <div className="container-fluid">
         {this.content()}
-      </div>
     </div>
   },
   content: function() {
     if(this.props.children) {
-      return <div className="container">
+      return <div>
         {this.props.children}
       </div>
     } else {
-      return <div className="container">
+      return <div>
         {this.renderFilter()}
         {this.renderRandomButton()}
         {this.renderHobbyContent()}

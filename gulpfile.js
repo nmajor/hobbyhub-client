@@ -99,7 +99,7 @@ gulp.task('compress', ['compresscss', 'compressjs']);
 gulp.task('compresscss', function () {
   return gulp.src('./sass/**/*.scss')
     .pipe(sass().on('error', sass.logError))
-    // .pipe(addsrc('./css/bootstrap.min.css'))
+    .pipe(addsrc('./css/bootstrap.min.css'))
     .pipe(minifyCss({compatibility: 'ie8'}))
     .pipe(concat('style.min.css'))
     // .pipe(gzip({ append: true }))

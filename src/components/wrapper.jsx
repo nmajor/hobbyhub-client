@@ -1,5 +1,6 @@
 var React = require('react');
 var Reflux = require('reflux');
+var Link = require('react-router').Link;
 
 var UserStore = require('../stores/user-store');
 var UserActions = require('../actions/user-actions');
@@ -18,6 +19,7 @@ module.exports = React.createClass({
     return <div className="wrapper">
       <div className="container">
         {this.renderHeader()}
+        {this.renderLogo()}
         {this.props.children}
       </div>
     </div>
@@ -29,5 +31,12 @@ module.exports = React.createClass({
         <Header />
       </div>
     }
+  },
+  renderLogo: function() {
+    return <div className="row">
+      <div className="col-md-12">
+        <Link className="site-logo" to="/">dathobby.com</Link>
+      </div>
+    </div>
   }
 });
