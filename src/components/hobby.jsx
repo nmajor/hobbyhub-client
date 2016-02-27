@@ -8,6 +8,7 @@ var EmbeddedVideo = require('./embedded-video');
 var Resource = require('./resource');
 var AffiliateLink = require('./affiliate-link');
 var Loading = require('./loading');
+var ImageLoader = require('./image-loader');
 
 module.exports = React.createClass({
   mixins: [
@@ -28,7 +29,7 @@ module.exports = React.createClass({
       <h1>{this.props.hobby.name} {this.renderHobbyActions()}</h1>
       <div className="row">
         <div className="col-md-6">
-          <img className="hobby-image" src={this.props.hobby.imageUrl} />
+          {this.renderHobbyImage()}
         </div>
         <div className="col-md-6">
           {this.renderInfo()}
@@ -54,6 +55,9 @@ module.exports = React.createClass({
         </div>
       </div>
     </div>
+  },
+  renderHobbyImage: function() {
+    return <ImageLoader imgClassName="hobby-image" src={this.props.hobby.imageUrl} />
   },
   renderHobbyActions: function() {
     if (this.state.userLoggedIn) {
@@ -89,7 +93,7 @@ module.exports = React.createClass({
     }
   },
   renderPracticalInfo: function() {
-    if (this.props.hobby.practical !== undefined && this.props.hobby.indoor === true) {
+    if (this.props.hobby.practical !== undefined && this.props.hobby.practical === true) {
       return <div className="info-item">Practical</div>
     }
   },
@@ -118,18 +122,18 @@ module.exports = React.createClass({
   renderStartingCostInfo: function() {
     if (this.props.hobby.startingCost !== undefined) {
       if (this.props.hobby.startingCost[0] === this.props.hobby.startingCost[1]) {
-        return <div className="info-item">Start ${this.props.hobby.startingCost[0]}</div>
+        return <div className="info-item">Start Cost ${this.props.hobby.startingCost[0]}</div>
       } else {
-        return <div className="info-item">Start ${this.props.hobby.startingCost[0]}-${this.props.hobby.startingCost[1]}</div>
+        return <div className="info-item">Start Cost ${this.props.hobby.startingCost[0]}-${this.props.hobby.startingCost[1]}</div>
       }
     }
   },
   renderRepeatCostInfo: function() {
     if (this.props.hobby.repeatCost !== undefined) {
       if (this.props.hobby.repeatCost[0] === this.props.hobby.repeatCost[1]) {
-        return <div className="info-item">Repeat ${this.props.hobby.repeatCost[0]}</div>
+        return <div className="info-item">Repeat Cost ${this.props.hobby.repeatCost[0]}</div>
       } else {
-        return <div className="info-item">Repeat ${this.props.hobby.repeatCost[0]}-${this.props.hobby.repeatCost[1]}</div>
+        return <div className="info-item">Repeat Cost ${this.props.hobby.repeatCost[0]}-${this.props.hobby.repeatCost[1]}</div>
       }
     }
   },

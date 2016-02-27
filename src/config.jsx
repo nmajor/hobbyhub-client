@@ -1,6 +1,6 @@
 module.exports = function() {
   var domain = window.location.host;
-  // return 'http://api.dathobby.com/';
+  return 'http://api.dathobby.com/';
 
   if ( domain === 'localhost:8000') {
     // return 'http://dockerhost/'

@@ -138,6 +138,13 @@
     left: 0;
     width: 100%;
     height: 100%; }
+  .hobby .image-loader .img-loading .loader {
+    margin-right: 2px;
+    display: inline-block;
+    position: relative;
+    top: -4px;
+    height: 18px;
+    width: 18px; }
 
 .text-loader .loader {
   margin-right: 2px;
