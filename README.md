@@ -9,6 +9,7 @@ Mobile
 Change affiliate links to be tiles so that images will work
 Add an optional price property to affiliate links
 Add form error messages for bad validation (Missing fields)
+Change the words Start and Repeat to also say the word cost in the hobby info section
 
 ## Other TODO
 Copy for about page
