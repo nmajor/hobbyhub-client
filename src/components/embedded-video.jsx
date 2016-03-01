@@ -76,7 +76,6 @@ module.exports = React.createClass({
     }
   },
   handleImageClick: function() {
-    console.log();
     this.setState({clicked: true});
   }
 });
