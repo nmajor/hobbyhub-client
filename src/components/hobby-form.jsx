@@ -95,13 +95,14 @@ module.exports = React.createClass({
     </div>
   },
   renderDescFormGroup: function() {
+    var val = this.state.hobby.desc || '';
     return <div className="form-group">
       <label htmlFor="hobby-desc">Description</label>
       <textarea
         className="form-control"
         id="hobby-desc"
         onChange={this.handleDescChange}
-        value={this.state.hobby.desc}
+        value={val}
       ></textarea>
     </div>
   },

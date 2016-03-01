@@ -143,7 +143,10 @@ var CompilationStore = Reflux.createStore({
         this.data.hobby = data;
         this.data.savingHobby = false;
         this.trigger(this.data);
-      }.bind(this));
+      }.bind(this))
+      .catch(function(err) {
+        console.log(err);
+      });
     } else {
       Api.post('hobbies', this.data.hobby)
       .then(function(data) {
@@ -153,7 +156,10 @@ var CompilationStore = Reflux.createStore({
         this.data.savingHobby = false;
         history.push('admin/hobbies/'+data.slug+'/edit');
         this.trigger(this.data);
-      }.bind(this));
+      }.bind(this))
+      .catch(function(err) {
+        console.log(err);
+      });
     }
   },
   onAddResource: function(attr, resource) {

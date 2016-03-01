@@ -10,6 +10,14 @@ module.exports = React.createClass({
       clicked: false
     }
   },
+  componentWillReceiveProps: function(newProps) {
+    if ( newProps.video.src !== this.props.video.src ) {
+      this.setState({
+        played: false,
+        clicked: false
+      });
+    }
+  },
   render: function() {
     return <div className="embedded-video-wrapper">
       <h5>{this.props.video.text}</h5>

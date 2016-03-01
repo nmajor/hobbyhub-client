@@ -23,7 +23,7 @@ module.exports = React.createClass({
         <li><Link to="/">Home</Link></li>
         <li><Link to="/admin/users">Users</Link></li>
         <li><Link to="/admin/hobbies/all">Hobbies</Link></li>
-        <li><Link to="/admin/hobbies/new">Add Hobby</Link></li>
+        <li><Link to="/admin/hobbies/new">New Hobby</Link></li>
       </ul>
     } else {
       return null;

@@ -34,7 +34,7 @@ module.exports = {
       if (response.status !== 200) {
         throw {
           error: 'Non 200 response',
-          response: response
+          response: response.json()
         };
       }
 
