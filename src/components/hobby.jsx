@@ -2,6 +2,7 @@ var React = require('react');
 var Reflux = require('reflux');
 var Link = require('react-router').Link;
 var _ = require('lodash');
+var Helmet = require('react-helmet');
 
 var UserStore = require('../stores/user-store');
 var EmbeddedVideo = require('./embedded-video');
@@ -27,6 +28,7 @@ module.exports = React.createClass({
     } else if (!this.props.hobby) { return null; }
 
     return <div>
+      {this.renderMeta()}
       <h1>{this.props.hobby.name} {this.renderHobbyActions()}</h1>
       <div className="row">
         <div className="col-md-12">
@@ -61,6 +63,30 @@ module.exports = React.createClass({
         </div>
       </div>
     </div>
+  },
+  renderMeta: function() {
+    return <Helmet
+        title={this.props.hobby.name}
+        base={{"target": "_blank", "href": "http://dathobby.com/"}}
+        meta={[
+            {"name": "description", "content": this.props.hobby.desc},
+            {"itemprop": "name", "content": this.props.hobby.name},
+            {"itemprop": "description", "content": this.props.hobby.desc},
+            {"itemprop": "image", "content": this.props.hobby.imageUrl},
+            {"name": "twitter:card", "content": this.props.hobby.desc},
+            {"name": "twitter:site", "content": "dathobby"},
+            {"name": "twitter:title", "content": this.props.hobby.name},
+            {"name": "twitter:description", "content": this.props.hobby.desc},
+            {"name": "twitter:image:src", "content": this.props.hobby.imageUrl},
+            {"property": "og:url", "content": "http://dathobby.com/hobbies/"+this.props.hobby.slug},
+            {"property": "og:title", "content": this.props.hobby.name},
+            {"property": "og:description", "content": this.props.hobby.desc},
+            {"property": "og:image", "content": this.props.hobby.imageUrl},
+            {"property": "og:type", "content": "article"},
+            {"property": "og:locale", "content": "en_US"},
+        ]}
+        onChangeClientState={function(newState) { console.log(newState);}}
+    />
   },
   renderTags: function() {
     return <HobbyTags hobby={this.props.hobby} />

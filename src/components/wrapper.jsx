@@ -1,6 +1,7 @@
 var React = require('react');
 var Reflux = require('reflux');
 var Link = require('react-router').Link;
+var Helmet = require('react-helmet');
 
 var UserStore = require('../stores/user-store');
 var UserActions = require('../actions/user-actions');
@@ -18,6 +19,7 @@ module.exports = React.createClass({
   ],
   render: function() {
     return <div>
+      {this.renderMeta()}
       <div id="wrapper">
         {this.renderHeader()}
         <div className="container">
@@ -28,6 +30,17 @@ module.exports = React.createClass({
       </div>
       {this.renderFooter()}
     </div>
+  },
+  renderMeta: function() {
+    return <Helmet
+        title="Home"
+        titleTemplate="dathobby.com - %s"
+        base={{"target": "_blank", "href": "http://dathobby.com/"}}
+        meta={[
+            {"name": "description", "content": "Your next hobby might be something you've never heard of before today."},
+            {"property": "og:site_name", "content": "dathobby.com"},
+        ]}
+    />
   },
   renderHeader: function() {
     if ( this.state.userLoggedIn ) {
