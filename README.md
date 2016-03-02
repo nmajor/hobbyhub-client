@@ -1,5 +1,6 @@
 ## TODO
 
+About to try to isomorphicize this app
 
 Handle www redirect (301 best for SEO)
 
