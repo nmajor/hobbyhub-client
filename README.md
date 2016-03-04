@@ -1,14 +1,19 @@
 ## TODO
 
+About to try to isomorphicize this app
 
 Handle www redirect (301 best for SEO)
 
 Add Cost Filters
-Social Sharing
 Mobile
 Change affiliate links to be tiles so that images will work
-Add an optional price property to affiliate links
-Add form error messages for bad validation (Missing fields)
+
+Social Media meta data
+Image uploading and processing
+Add play icon for video thumbs
+Add a hover color for selected filters to show they are turned off
+
+
 
 ## Other TODO
 Copy for about page
@@ -49,6 +54,8 @@ Going from edit hobby to new hobby should clear the form
 Page lags when trying to load the video. Maybe show the image thumb until people click it.
 Videos are not changing when the hobby changes
 Saving a new hobby should change the url to be the edit page of the new hobby
-
 Change the words Start and Repeat to also say the word cost in the hobby info section
 Fixed image lag when changing hobbies
+Hobby desc not clearing when adding a new hobby
+Change the words Start and Repeat to also say the word cost in the hobby info section
+Social Sharing

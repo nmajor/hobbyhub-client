@@ -5,6 +5,8 @@ var history = require('../history');
 
 var Api = require('../utils/api');
 
+var UserStore = require('./user-store');
+
 var CompilationStore = Reflux.createStore({
   listenables: HobbyActions,
   data: {
@@ -19,7 +21,7 @@ var CompilationStore = Reflux.createStore({
     this.data.loadingHobbies = true;
     this.trigger(this.data);
 
-    Api.get('hobbies')
+    this.getHobbies()
     .then(function(data) {
       if (data.error) { console.log('Something went wrong'); console.log(data.error); return; }
 
@@ -32,7 +34,7 @@ var CompilationStore = Reflux.createStore({
     this.data.loadingHobbies = true;
     this.trigger(this.data);
 
-    Api.get('hobbies')
+    this.getHobbies()
     .then(function(data) {
       if (data.error) { console.log('Something went wrong'); console.log(data.error); return; }
 
@@ -65,7 +67,8 @@ var CompilationStore = Reflux.createStore({
 
     this.data.filteredHobbies = _.filter(this.data.hobbies, function(hobby) {
       return (
-        (filter.indoor === undefined || filter.indoor === hobby.indoor)
+        hobby.public === true
+        && (filter.indoor === undefined || filter.indoor === hobby.indoor)
         && ( filter.computer === undefined || filter.computer === hobby.computer )
         && ( filter.artistic === undefined || filter.artistic === hobby.artistic )
         && ( filter.practical === undefined || filter.practical === hobby.practical )
@@ -74,6 +77,7 @@ var CompilationStore = Reflux.createStore({
     });
 
     if (cb) { cb(this.data.filteredHobbies); }
+    this.trigger(this.data);
   },
   onGetHobby: function(hobbySlug) {
     var hobby = _.find(this.data.hobbies, {slug: hobbySlug});
@@ -121,7 +125,6 @@ var CompilationStore = Reflux.createStore({
     }
     console.log('Filter: '+JSON.stringify(this.data.filter));
     HobbyActions.FilterHobbies();
-    this.trigger(this.data);
   },
   onLoadNewHobby: function() {
     this.data.hobby = {};
@@ -143,7 +146,10 @@ var CompilationStore = Reflux.createStore({
         this.data.hobby = data;
         this.data.savingHobby = false;
         this.trigger(this.data);
-      }.bind(this));
+      }.bind(this))
+      .catch(function(err) {
+        console.log(err);
+      });
     } else {
       Api.post('hobbies', this.data.hobby)
       .then(function(data) {
@@ -153,7 +159,10 @@ var CompilationStore = Reflux.createStore({
         this.data.savingHobby = false;
         history.push('admin/hobbies/'+data.slug+'/edit');
         this.trigger(this.data);
-      }.bind(this));
+      }.bind(this))
+      .catch(function(err) {
+        console.log(err);
+      });
     }
   },
   onAddResource: function(attr, resource) {
@@ -178,6 +187,13 @@ var CompilationStore = Reflux.createStore({
   // Private Functions
   getHobby: function() {
     return
+  },
+  getHobbies: function() {
+    if (UserStore.data.userLoggedIn) {
+      return Api.get('hobbies/all')
+    } else {
+      return Api.get('hobbies')
+    }
   }
 });
 

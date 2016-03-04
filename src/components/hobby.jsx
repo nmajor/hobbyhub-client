@@ -2,6 +2,7 @@ var React = require('react');
 var Reflux = require('reflux');
 var Link = require('react-router').Link;
 var _ = require('lodash');
+var Helmet = require('react-helmet');
 
 var UserStore = require('../stores/user-store');
 var EmbeddedVideo = require('./embedded-video');
@@ -9,6 +10,7 @@ var Resource = require('./resource');
 var AffiliateLink = require('./affiliate-link');
 var Loading = require('./loading');
 var ImageLoader = require('./image-loader');
+var HobbyTags = require('./hobby-tags');
 
 module.exports = React.createClass({
   mixins: [
@@ -26,19 +28,25 @@ module.exports = React.createClass({
     } else if (!this.props.hobby) { return null; }
 
     return <div>
+      {this.renderMeta()}
       <h1>{this.props.hobby.name} {this.renderHobbyActions()}</h1>
+      <div className="row">
+        <div className="col-md-12">
+          {this.renderTags()}
+        </div>
+      </div>
       <div className="row">
         <div className="col-md-6">
           {this.renderHobbyImage()}
         </div>
         <div className="col-md-6">
-          {this.renderInfo()}
+          <h4>Description</h4>
+          <p>{this.props.hobby.desc}</p>
         </div>
       </div>
       <div className="row">
         <div className="col-md-12">
-          <h4>Description</h4>
-          <p>{this.props.hobby.desc}</p>
+          {this.renderSharing()}
         </div>
       </div>
       <div className="row">
@@ -56,6 +64,36 @@ module.exports = React.createClass({
       </div>
     </div>
   },
+  renderMeta: function() {
+    return <Helmet
+        title={this.props.hobby.name}
+        base={{"target": "_blank", "href": "http://dathobby.com/"}}
+        meta={[
+            {"name": "description", "content": this.props.hobby.desc},
+            {"itemprop": "name", "content": this.props.hobby.name},
+            {"itemprop": "description", "content": this.props.hobby.desc},
+            {"itemprop": "image", "content": this.props.hobby.imageUrl},
+            {"name": "twitter:card", "content": this.props.hobby.desc},
+            {"name": "twitter:site", "content": "dathobby"},
+            {"name": "twitter:title", "content": this.props.hobby.name},
+            {"name": "twitter:description", "content": this.props.hobby.desc},
+            {"name": "twitter:image:src", "content": this.props.hobby.imageUrl},
+            {"property": "og:url", "content": "http://dathobby.com/hobbies/"+this.props.hobby.slug},
+            {"property": "og:title", "content": this.props.hobby.name},
+            {"property": "og:description", "content": this.props.hobby.desc},
+            {"property": "og:image", "content": this.props.hobby.imageUrl},
+            {"property": "og:type", "content": "article"},
+            {"property": "og:locale", "content": "en_US"},
+        ]}
+        onChangeClientState={function(newState) { console.log(newState);}}
+    />
+  },
+  renderTags: function() {
+    return <HobbyTags hobby={this.props.hobby} />
+  },
+  renderSharing: function() {
+    return <div className="addthis_sharing_toolbox"></div>
+  },
   renderHobbyImage: function() {
     return <ImageLoader imgClassName="hobby-image" src={this.props.hobby.imageUrl} />
   },
@@ -66,77 +104,6 @@ module.exports = React.createClass({
       </div>
     }
   },
-  renderInfo: function() {
-    return <div>
-      <h4>Info</h4>
-      {this.renderIndoorInfo()}
-      {this.renderComputerInfo()}
-      {this.renderPracticalInfo()}
-      {this.renderArtisticInfo()}
-      {this.renderDifficultyInfo()}
-      {this.renderStartingCostInfo()}
-      {this.renderRepeatCostInfo()}
-    </div>
-  },
-  renderIndoorInfo: function() {
-    if (this.props.hobby.indoor !== undefined) {
-      return <div className="info-item">
-        { this.props.hobby.indoor === true ? 'Indoor' : 'Outdoor' }
-      </div>
-    }
-  },
-  renderComputerInfo: function() {
-    if (this.props.hobby.computer !== undefined) {
-      return <div className="info-item">
-        { this.props.hobby.computer === true ? 'Computer' : 'No Computer' }
-      </div>
-    }
-  },
-  renderPracticalInfo: function() {
-    if (this.props.hobby.practical !== undefined && this.props.hobby.practical === true) {
-      return <div className="info-item">Practical</div>
-    }
-  },
-  renderArtisticInfo: function() {
-    if (this.props.hobby.artistic !== undefined && this.props.hobby.artistic === true) {
-      return <div className="info-item">Artistic</div>
-    }
-  },
-  renderDifficultyInfo: function() {
-    if (this.props.hobby.difficulty !== undefined) {
-      var difficultyString = '';
-      switch(this.props.hobby.difficulty) {
-        case 0:
-          difficultyString = 'Beginner';
-          break;
-        case 1:
-          difficultyString = 'Intermediate';
-          break;
-        case 1:
-          difficultyString = 'Advanced';
-          break;
-      }
-      return <div className="info-item">{difficultyString}</div>
-    }
-  },
-  renderStartingCostInfo: function() {
-    if (this.props.hobby.startingCost !== undefined) {
-      if (this.props.hobby.startingCost[0] === this.props.hobby.startingCost[1]) {
-        return <div className="info-item">Start Cost ${this.props.hobby.startingCost[0]}</div>
-      } else {
-        return <div className="info-item">Start Cost ${this.props.hobby.startingCost[0]}-${this.props.hobby.startingCost[1]}</div>
-      }
-    }
-  },
-  renderRepeatCostInfo: function() {
-    if (this.props.hobby.repeatCost !== undefined) {
-      if (this.props.hobby.repeatCost[0] === this.props.hobby.repeatCost[1]) {
-        return <div className="info-item">Repeat Cost ${this.props.hobby.repeatCost[0]}</div>
-      } else {
-        return <div className="info-item">Repeat Cost ${this.props.hobby.repeatCost[0]}-${this.props.hobby.repeatCost[1]}</div>
-      }
-    }
-  },
   renderResources: function() {
     if (!this.props.hobby.resources || this.props.hobby.resources.length === 0) {return null;}
 
@@ -144,7 +111,7 @@ module.exports = React.createClass({
       return <Resource hobby={this.props.hobby} resource={resource} key={index} />
     }.bind(this));
 
-    return  <div>
+    return <div>
       <h4>Resources</h4>
       {resources}
     </div>
@@ -165,11 +132,11 @@ module.exports = React.createClass({
     if (!this.props.hobby.videos || this.props.hobby.videos.length === 0) { return null; }
 
     var videos = this.props.hobby.videos.map(function(video, index, array) {
-      var botmost = index === (array.length - 1);
-      return <div className="col-md-6">
-        <EmbeddedVideo hobby={this.props.hobby} video={video} key={index} />
+      return <div key={index} className="col-md-6">
+        <EmbeddedVideo hobby={this.props.hobby} video={video} />
       </div>
     }.bind(this));
+
 
     return <div className="videos">
       <h4>Videos</h4>
@@ -178,8 +145,4 @@ module.exports = React.createClass({
       </div>
     </div>
   },
-  handleAffiliateLinkClick: function() {
-
-  }
-
 });

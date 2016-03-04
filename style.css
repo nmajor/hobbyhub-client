@@ -129,7 +129,8 @@
     padding-bottom: 56.25%;
     padding-top: 30px;
     height: 0;
-    overflow: hidden; }
+    overflow: hidden;
+    margin: 30px 0; }
   .hobby .embedded-video iframe,
   .hobby .embedded-video object,
   .hobby .embedded-video embed {
@@ -145,6 +146,14 @@
     top: -4px;
     height: 18px;
     width: 18px; }
+  .hobby .hobby-tags {
+    margin-bottom: 20px; }
+    .hobby .hobby-tags .hobby-tag {
+      display: inline-block;
+      background: #316488;
+      color: white;
+      padding: 2px 15px;
+      margin-right: 5px; }
 
 .text-loader .loader {
   margin-right: 2px;
