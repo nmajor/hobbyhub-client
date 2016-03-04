@@ -50,6 +50,7 @@ var bundler = watchify(browserify({
 
 function bundle() {
   return bundler
+    .transform("babelify", {presets: ["es2015", "react"]})
     .bundle()
     .on('error', notify)
     .pipe(source('main.js'))
@@ -114,7 +115,9 @@ gulp.task('compressjs', function() {
       cache: {},
       packageCache: {},
       fullPaths: true
-    }).bundle()
+    })
+    .transform("babelify", {presets: ["es2015", "react"]})
+    .bundle()
     .pipe(source('app.min.js'))
     .pipe(buffer())
     .pipe(uglify())
