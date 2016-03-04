@@ -1,2 +1,3 @@
-var history = require('history').createHashHistory({ queryKey: false });
+var history = require('./utils/is-browser')() ? require('history').createHashHistory({ queryKey: false }) : undefined;
+
 module.exports = history;

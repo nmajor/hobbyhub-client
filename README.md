@@ -12,6 +12,7 @@ Social Media meta data
 Image uploading and processing
 Add play icon for video thumbs
 Add a hover color for selected filters to show they are turned off
+Test to make sure GA fires on isomporphically loaded page
 
 
 

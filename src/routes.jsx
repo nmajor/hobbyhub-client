@@ -2,7 +2,7 @@ var React = require('react');
 var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 
-var history = require('./history');
+// var history = require('./history');
 var ga = require('./ga');
 
 var Wrapper = require('./components/wrapper');
@@ -19,13 +19,39 @@ var About = require('./components/about');
 var Contact = require('./components/contact');
 var Affiliates = require('./components/affiliates');
 
+function isBrowser() {try {return this===window;}catch(e){ return false;}}
 
 function handleEnterRoute(props) {
   if (ga) { ga.pageview(props.location.pathname); }
 }
 
-module.exports = (
-  <Router history={history}>
+var React = require('react');
+
+// module.exports = React.createClass({
+//   render: function() {
+//     return <Router>
+//       <Route onEnter={handleEnterRoute} component={Wrapper}>
+//         <Route path="/" component={Main} />
+//         <Route path="/hobbies/:hobbySlug" component={Main} />
+//         <Route path="/login" component={Login} />
+//         <Route path="/about" component={About} />
+//         <Route path="/contact" component={Contact} />
+//         <Route path="/affiliates" component={Affiliates} />
+//         <Route path="/admin/" component={Admin}>
+//           <Route path="users" component={Users} />
+//           <Route path="register" component={Register} />
+//           <Route path="hobbies/all" component={HobbyList} />
+//           <Route path="hobbies/new" component={NewHobby} />
+//           <Route path="hobbies/:hobbySlug/edit" component={EditHobby} />
+//         </Route>
+//         <Route path="/404" component={PageNotFound} />
+//       </Route>
+//       <Route path="*" component={PageNotFound}/>
+//     </Router>
+//   }
+// });
+
+module.exports = <Router>
     <Route onEnter={handleEnterRoute} component={Wrapper}>
       <Route path="/" component={Main} />
       <Route path="/hobbies/:hobbySlug" component={Main} />
@@ -44,4 +70,3 @@ module.exports = (
     </Route>
     <Route path="*" component={PageNotFound}/>
   </Router>
-);
