@@ -40,7 +40,6 @@ var notify = function(error) {
 
 var bundler = watchify(browserify({
   entries: ['./src/app.jsx'],
-  transform: [reactify],
   extensions: ['.jsx'],
   debug: true,
   cache: {},
@@ -111,7 +110,6 @@ gulp.task('compressjs', function() {
   return browserify({
       entries: ['./src/app.jsx'],
       extensions: ['.jsx'],
-      transform: [reactify],
       cache: {},
       packageCache: {},
       fullPaths: true
