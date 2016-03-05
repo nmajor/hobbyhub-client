@@ -186,7 +186,7 @@ class HobbyAffiliateLink extends Component {
 class HobbyVideoList extends Component {
   render() {
     return <div className="hobby-video-list row">
-      <h3>Videos 2 3</h3>
+      <h3>Videos</h3>
       {this.renderVideos()}
     </div>
   }
@@ -212,4 +212,4 @@ class HobbyVideo extends Component {
   }
 }
 
-ReactDOM.render(<MainContainer />, document.getElementById('app'));
+module.exports = MainContainer;
