@@ -1,0 +1,43 @@
+
+// How to impliment this sticky footer:
+// http://getbootstrap.com/examples/sticky-footer/
+// Pay attention to all the page html and styles not just the footer elements
+
+#push,
+#footer {
+    height: 80px;
+}
+
+#footer {
+  background-color: #222;
+  border-color: #080808;
+  color: #9d9d9d;
+  text-align: center;
+
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .footer-nav {
+    margin: 30px 0;
+
+    .dot {
+      margin: 0 10px;
+    }
+  }
+
+  ul {
+    padding-left: 0;
+  }
+
+  a {
+    color: #9d9d9d;
+
+    &:hover {
+      color:#fff;
+      background-color: transparent;
+      text-decoration: none;
+    }
+  }
+}

@@ -1,3 +1,10 @@
+### Notes
+
+HobbyContainer
+  Filter
+  Hobby
+
+
 ## TODO
 
 About to try to isomorphicize this app
